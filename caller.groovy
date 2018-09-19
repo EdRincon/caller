@@ -1,0 +1,28 @@
+/*
+* This groovy file calls  fuctions in another groovy file
+* to improve mainainance 
+*/
+def gitUser = ''
+def responderURL =''
+
+node {master} {
+	stage ('Clone second gith repository') {
+		try{
+			checkout()
+		} catch {
+			println 'error cloning second repository'
+		}
+	}
+
+	stage ('Use methods') {
+		def responder = load 'responder.groovy'
+		responder.hello('hello')
+	}
+}
+
+def checkout() {
+	checkout([$class: 'GitSCM', branches: [[name: '*/'+"${master}"]], doGenerateSubmoduleConfigurations: false, extensions:
+		[[$class: 'RelativeTargetDirectory'], [$class: 'UserExclusion', excludedUsers: 'gitUser'],
+		[$class: 'MessageExclusion', excludeMessage: '(?s).*JENKINS_IGNORE.*']],
+		submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${credentialsId}", url: "${responderURL}"]]])
+}
