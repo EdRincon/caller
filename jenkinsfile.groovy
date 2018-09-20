@@ -16,7 +16,7 @@ node {
 	stage ('Use methods') {
 		def responder 
 		println responder
-		responder = load('responder.groovy')
+		responder = load 'responder.groovy'
 		println responder
 		responder.hello('hello')
 	}
