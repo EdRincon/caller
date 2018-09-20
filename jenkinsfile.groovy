@@ -8,7 +8,7 @@ def responderURL ='https://github.com/EdRincon/responder.git'
 node {master} {
 	stage ('Clone second gith repository') {
 		try{
-			git responderURL
+			repoclone()
 		} catch (Exception err){
 			println err
 		}
@@ -21,8 +21,9 @@ node {master} {
 	}
 }
 
-//def checkout() {
-//	checkout([$class: 'GitSCM', branches: [[name: '*/'+"${master}"]], doGenerateSubmoduleConfigurations: false, extensions:
-//		[[$class: 'RelativeTargetDirectory'], [$class: 'MessageExclusion', excludeMessage: '(?s).*JENKINS_IGNORE.*']],
-//		submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${credentialsId}", url: "${responderURL}"]]])
-//}
+def repoclone() {
+	checkout([$class: 'GitSCM', branches: [[name: '*/'+"${master}"]], doGenerateSubmoduleConfigurations: false, extensions:
+		[[$class: 'RelativeTargetDirectory'], [$class: 'MessageExclusion', excludeMessage: '(?s).*JENKINS_IGNORE.*']],
+		submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${credentialsId}", url: "${responderURL}"]]])
+	git responderURL
+}
