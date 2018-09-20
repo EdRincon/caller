@@ -5,7 +5,7 @@
 def gitUser = ''
 def responderURL ='https://github.com/EdRincon/responder.git'
 
-node {master} {
+node ('master') {
 	stage ('Clone second gith repository') {
 		try{
 			repoclone()
