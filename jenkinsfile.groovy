@@ -8,17 +8,14 @@ node {
 	stage ('Clone second gith repository') {
 		try{
 			repoclone()
+			def responder 
+			println responder
+			responder = load 'responder.groovy'
+			println responder
+			responder.hello('hello')
 		} catch (Exception err){
 			println err
 		}
-	}
-
-	stage ('Use methods') {
-		def responder 
-		println responder
-		responder = load 'responder.groovy'
-		println responder
-		responder.hello('hello')
 	}
 }
 
