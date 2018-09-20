@@ -14,6 +14,7 @@ node {
 	}
 
 	stage ('Use methods') {
+		sh('ls -alR')
 		def responder = load 'responder.groovy'
 		println responder
 		responder.hello('hello')
