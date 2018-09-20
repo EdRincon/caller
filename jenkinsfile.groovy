@@ -16,6 +16,7 @@ node {master} {
 
 	stage ('Use methods') {
 		def responder = load 'responder.groovy'
+		println responder
 		responder.hello('hello')
 	}
 }
